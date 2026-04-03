@@ -78,10 +78,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tag__close-icon;
 }
 
-:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
-  @extend .#{$prefix}--tag__custom-icon;
-}
-
 :host(#{$prefix}-tag),
 :host(#{$prefix}-tag-skeleton),
 :host(#{$prefix}-dismissible-tag) {
@@ -221,8 +217,8 @@ $css--plex: true !default;
   display: inline-flex;
 }
 
-:host(#{$prefix}-tag) ::slotted([slot='icon']),
-:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']) {
+:host(#{$prefix}-tag) ::slotted([slot='icon']:not(slot)),
+:host(#{$prefix}-dismissible-tag) ::slotted([slot='icon']:not(slot)) {
   @extend .#{$prefix}--tag__custom-icon;
 }
 

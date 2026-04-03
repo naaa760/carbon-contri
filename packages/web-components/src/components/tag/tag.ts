@@ -59,9 +59,17 @@ class CDSTag extends HostListenerMixin(FocusMixin(LitElement)) {
    * Handles `slotchange` event.
    */
   protected _handleIconSlotChange({ target }: Event) {
-    const hasIcon = (target as HTMLSlotElement).assignedNodes();
+    const nodes = (target as HTMLSlotElement).assignedNodes({ flatten: true });
 
-    this.hasCustomIcon = hasIcon.length > 0;
+    this.hasCustomIcon = nodes.some((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return Boolean(node.textContent?.trim());
+      }
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        return true;
+      }
+      return false;
+    });
     this.requestUpdate();
   }
 
